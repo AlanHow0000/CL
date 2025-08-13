@@ -6,18 +6,26 @@
   <title>LinguaLab – Practice English with AI</title>
   <meta name="description" content="Scenario-based English practice with AI conversations. Daily English and Workplace English." />
   <style>
-    :root{--bg:#0b1020;--card:#121936;--muted:#9aa4c7;--text:#e6e9f7;--accent:#6e9cff;--accent-2:#8ef0d0;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:18px}
+    :root{
+      --bg:#0b1020;--card:#121936;--muted:#9aa4c7;--text:#e6e9f7;
+      --accent:#6e9cff;--accent-2:#8ef0d0;--shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    body{
+      margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:radial-gradient(1000px 600px at 80% -10%,#1a2460,transparent),
                  radial-gradient(800px 600px at -10% 20%,#1b3b42,transparent),
-                 var(--bg);color:var(--text)}
-    header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(9,11,24,.6);border-bottom:1px solid rgba(255,255,255,.05);z-index:50}
+                 var(--bg);color:var(--text)
+    }
+    header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(9,11,24,.6);
+      border-bottom:1px solid rgba(255,255,255,.05);z-index:50}
     .container{max-width:1120px;margin:0 auto;padding:16px}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
     .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:var(--shadow)}
     .pill{padding:6px 12px;border:1px solid rgba(255,255,255,.1);border-radius:999px;color:var(--muted);font-size:14px}
+
     .hero{padding:56px 16px 20px}
     .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
     @media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
@@ -26,38 +34,46 @@
     .card.pad{padding:22px}
     h1{font-size:clamp(28px,5vw,48px);margin:0 0 10px;line-height:1.1}
     .sub{color:var(--muted);font-size:clamp(14px,2.2vw,18px)}
+
     .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
     .stat{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);text-align:center}
     .stat .big{font-weight:800;font-size:22px}
     .stat .cap{color:var(--muted);font-size:12px}
+
     .scenarios{padding:26px 16px 60px}
     .section-title{display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px}
     .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
     @media (max-width:1200px){.grid{grid-template-columns:repeat(4,1fr)}}
     @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:560px){.grid{grid-template-columns:1fr}}
+
     .scenario{position:relative;overflow:hidden;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
     .scenario:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
     .thumb{aspect-ratio:16/11;background:#0e1430;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:42px}
     .scenario h3{margin:14px 16px 6px;font-size:16px}
     .scenario p{margin:0 16px 14px;color:var(--muted);font-size:13px}
+
     .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .btn{appearance:none;border:0;cursor:pointer;padding:11px 14px;border-radius:12px;font-weight:700;color:#0d142e;background:linear-gradient(180deg,var(--accent),#5f7df5);box-shadow:var(--shadow)}
     .btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.1);font-weight:600}
     .btn.ghost{background:transparent;color:var(--muted);border:1px dashed rgba(255,255,255,.2)}
     .input{padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
     .input::placeholder{color:#b8c0e0}
+
     .progress{height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
     .progress>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .3s ease}
+
+    .notice{font-size:13px;color:var(--muted)}
+    footer.site{padding:36px 16px 60px;color:var(--muted);text-align:center}
+    .badge{font-size:12px;color:#0a122c;background:var(--accent-2);padding:4px 8px;border-radius:999px;font-weight:700}
+
+    /* Modal */
     .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
     .modal{width:min(100%,980px);max-height:92vh;display:grid;grid-template-rows:auto 1fr auto;background:var(--card);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)}
     .modal header{position:sticky;top:0;background:rgba(18,25,54,.85);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 16px}
     .modal .body{padding:0;overflow:auto;background:#0b112d}
-    .modal iframe{display:block;width:100%;height:64vh;border:0;background:#0b112d}
+    .modal iframe{display:block;width:100%;height:72vh;border:0;background:#0b112d}
     .modal footer{padding:12px 16px;display:flex;gap:10px;justify-content:space-between;align-items:center}
-    .notice{font-size:13px;color:var(--muted)}
-    footer.site{padding:36px 16px 60px;color:var(--muted);text-align:center}
-    .badge{font-size:12px;color:#0a122c;background:var(--accent-2);padding:4px 8px;border-radius:999px;font-weight:700}
   </style>
 </head>
 <body>
@@ -99,8 +115,9 @@
           <div class="row">
             <button class="btn" id="resumeBtn">Resume last scenario</button>
             <button class="btn ghost" id="resetBtn" title="Reset local progress only">Reset progress</button>
+            <button class="btn secondary" id="markCompleteBtn" title="Adds points & updates your streak">Mark Completed</button>
           </div>
-          <span class="notice">Progress is saved on this device only (MVP). Mic needs HTTPS.</span>
+          <span class="notice">Progress is saved on this device only (MVP). Use HTTPS + Chrome for mic.</span>
         </div>
       </div>
 
@@ -110,9 +127,9 @@
           <span class="badge">MVP</span>
         </div>
         <ol style="line-height:1.9; color: var(--muted); padding-left: 18px; margin:0;">
-          <li>Choose a scenario under Daily or Workplace English</li>
-          <li>Talk with the AI (Voiceflow loads inside the popup)</li>
-          <li>Click <b>Mark Completed</b> to get points</li>
+          <li>Choose a scenario (Daily or Workplace)</li>
+          <li>A popup opens with an embedded Voiceflow chat</li>
+          <li>When you’re done, click <b>Mark Completed</b> for points</li>
           <li>Come back tomorrow to keep your streak 🔥</li>
         </ol>
       </div>
@@ -181,7 +198,7 @@
     </div>
   </section>
 
-  <!-- Modal -->
+  <!-- Modal with embedded Voiceflow -->
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <header>
@@ -191,17 +208,15 @@
             <span id="scenarioBadge" class="pill"></span>
           </div>
           <div class="row">
-            <button class="btn secondary" id="markCompleteBtn" title="Adds points & updates your streak">Mark Completed</button>
-            <button class="btn" id="closeModalBtn">Close</button>
+            <button class="btn secondary" id="closeModalBtn">Close</button>
           </div>
         </div>
       </header>
       <div class="body">
-        <!-- We inject the Voiceflow widget inside this iframe -->
         <iframe id="vfFrame" src="about:blank" allow="microphone; clipboard-read; clipboard-write;" title="Voiceflow Chat"></iframe>
       </div>
       <footer>
-        <span class="notice">Tip: Use your microphone for speaking practice. This MVP doesn’t grade pronunciation yet.</span>
+        <span class="notice">Tip: If the mic icon is missing, check browser permissions.</span>
         <div class="row"><button class="btn ghost" id="restartBtn">Restart Scenario</button></div>
       </footer>
     </div>
@@ -213,7 +228,7 @@
 
   <script>
     // ============================
-    // 🔧 YOUR VOICEFLOW PROJECT IDs (from your message)
+    // 🔧 YOUR Voiceflow projectIDs
     // ============================
     const VF_PROJECT = {
       ordering:    '68985df43b90d9d386b3e573',
@@ -258,18 +273,19 @@
       resetBtn: document.getElementById('resetBtn'),
       saveNameBtn: document.getElementById('saveNameBtn'),
       nameInput: document.getElementById('studentName'),
+      markBtn: document.getElementById('markCompleteBtn'),
       year: document.getElementById('year'),
+
+      // Modal
       backdrop: document.getElementById('modalBackdrop'),
       title: document.getElementById('modalTitle'),
       badge: document.getElementById('scenarioBadge'),
       frame: document.getElementById('vfFrame'),
       closeBtn: document.getElementById('closeModalBtn'),
       restartBtn: document.getElementById('restartBtn'),
-      doneBtn: document.getElementById('markCompleteBtn'),
     };
 
     function fmtDate(d){ return d.toISOString().slice(0,10); }
-
     function render(){
       el.points.textContent = state.points;
       el.streak.textContent = state.streak;
@@ -284,7 +300,6 @@
       el.year.textContent = new Date().getFullYear();
       el.nameInput.value = state.name;
     }
-
     function persist(){
       localStorage.setItem('ll_name', state.name);
       localStorage.setItem('ll_points', String(state.points));
@@ -293,8 +308,6 @@
       localStorage.setItem('ll_lastDate', state.lastActiveDate);
       localStorage.setItem('ll_streak', String(state.streak));
     }
-
-    // 🔥 Streak
     function updateStreakOnActivity(){
       const today = fmtDate(new Date());
       if (!state.lastActiveDate){ state.streak = 1; }
@@ -306,7 +319,7 @@
       state.lastActiveDate = today;
     }
 
-    // 🗂 Scenarios meta (title + badge)
+    // Meta (title + badge for modal header)
     const scenarioMeta = {
       ordering:    { title:'Ordering Food',              badge:'Daily' },
       appointment: { title:'Making an Appointment',      badge:'Daily' },
@@ -320,15 +333,28 @@
       prospects:   { title:'Talking to Prospects',       badge:'Workplace' },
     };
 
-    // ✅ Inject Voiceflow widget into the iframe for the selected projectID
+    // Inject Voiceflow widget into the iframe and make it look embedded
     function loadVFInIframe(projectID){
       const doc = el.frame.contentWindow.document;
       const html = `
 <!DOCTYPE html>
 <html><head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<style>html,body{margin:0;height:100%;background:#0b112d;color:#fff;font-family:Inter,system-ui,Arial}</style>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  html,body{margin:0;height:100%;background:#0b112d;color:#e6e9f7;font-family:Inter,system-ui,Arial}
+  /* Hide floating launcher; we open the chat as an embedded panel */
+  .vfrc-launcher{display:none !important;}
+  .vfrc-widget{
+    position: static !important;
+    inset: auto !important;
+    margin: 18px auto !important;
+    box-shadow: none !important;
+    width: min(900px, 96%) !important;
+    height: calc(100vh - 36px) !important;
+    border-radius: 16px !important;
+  }
+  .vfrc-chat, .vfrc-widget__container{height:100% !important; max-height:none !important;}
+</style>
 </head>
 <body>
 <script type="text/javascript">
@@ -343,6 +369,7 @@
       versionID:"production",
       voice:{ url:"https://runtime-api.voiceflow.com" }
     });
+    window.voiceflow.chat.open(); // open immediately so it looks embedded
   };
   (d.head||d.body).appendChild(v);
 })(document,"script");
@@ -353,31 +380,30 @@
 
     function openScenario(key){
       const meta = scenarioMeta[key];
-      const projectID = VF_PROJECT[key];
-      if (!meta || !projectID) return;
+      const id = VF_PROJECT[key];
+      if (!meta || !id) return;
 
       state.lastScenario = key; persist();
       el.title.textContent = meta.title;
       el.badge.textContent = meta.badge;
 
-      // show modal, then load widget inside the iframe
       el.backdrop.style.display = 'flex';
-      loadVFInIframe(projectID);
+      loadVFInIframe(id);
 
       updateStreakOnActivity(); persist(); render();
     }
 
     function closeModal(){ el.backdrop.style.display = 'none'; }
+    function restartScenario(){
+      const key = state.lastScenario; if (!key) return;
+      const id = VF_PROJECT[key]; if (!id) return;
+      loadVFInIframe(id);
+    }
     function markCompleted(){
       state.points += POINTS_PER_COMPLETION;
       state.completedCount += 1;
       updateStreakOnActivity(); persist(); render();
-      el.doneBtn.textContent = 'Marked ✓'; setTimeout(()=>{ el.doneBtn.textContent='Mark Completed'; }, 1200);
-    }
-    function restartScenario(){
-      const key = state.lastScenario; if (!key) return;
-      const projectID = VF_PROJECT[key]; if (!projectID) return;
-      loadVFInIframe(projectID);
+      el.markBtn.textContent = 'Marked ✓'; setTimeout(()=>{ el.markBtn.textContent='Mark Completed'; },1200);
     }
     function resetProgress(){
       if (!confirm('Reset local progress (points, streak, completed)?')) return;
@@ -395,11 +421,13 @@
     });
     el.closeBtn.addEventListener('click', closeModal);
     el.restartBtn.addEventListener('click', restartScenario);
-    el.doneBtn.addEventListener('click', markCompleted);
     el.resetBtn.addEventListener('click', resetProgress);
     el.saveNameBtn.addEventListener('click', saveName);
+    el.markBtn.addEventListener('click', markCompleted);
     el.resumeBtn.addEventListener('click', ()=> state.lastScenario && openScenario(state.lastScenario));
 
+    // Init
+    document.getElementById('year').textContent = new Date().getFullYear();
     render();
   </script>
 </body>
